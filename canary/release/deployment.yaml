@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: release-app
+spec:
+  selector:
+    matchLabels:
+      app: release-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: release-app
+    spec:
+      imagePullSecrets:
+        - name: product-key
+      containers:
+        - name: release-app
+          image: djlxs/gray-app:v2
+          ports:
+            - containerPort: 80
